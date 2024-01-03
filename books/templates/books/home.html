@@ -1,0 +1,25 @@
+
+<!-- templates/books/home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... -->
+</head>
+<body>
+    <h1>Welcome to the Home Page</h1>
+    <p>This is the home page of your book application.</p>
+
+    <!-- Display the latest books -->
+    <ul class="book-list">
+        {% for book in latest_books %}
+            <li class="book">
+                <h2>{{ book.title }}</h2>
+                <p>Author: {{ book.author }}</p>
+                <p>Description: {{ book.description }}</p>
+            </li>
+        {% empty %}
+            <li>No books found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

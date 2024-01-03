@@ -1,0 +1,131 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles1bookdetail.css' %}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book.title }} - Book Details</title>
+    <style>
+        /* CSS for the star rating */
+        .stars {
+            display: inline-block;
+        }
+
+        .star {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .star.checked {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ book.title }}</h1>
+    
+    <!-- Display the book image -->
+    <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" width="200">
+    
+    <p>Author: {{ book.author }}</p>
+    <p>Published Year: {{ book.published_year }}</p>
+    
+    <!-- Display the book description -->
+    <p>Description: {{ book.description }}</p>
+    
+    <!-- Display existing reviews -->
+    <h2>Reviews</h2>
+    <ul id="reviews">
+        {% for review in book.reviews.all %}
+            <li>
+                <div class="stars">
+                    {% for i in "12345" %}
+                        <span class="star {% if i <= review.rating %}checked{% endif %}" onclick="rateBook({{ review.id }}, {{ i }})">&#9733;</span>
+                    {% endfor %}
+                </div>
+                <p>{{ review.comment }}</p>
+            </li>
+        {% empty %}
+            <li>No reviews yet.</li>
+        {% endfor %}
+    </ul>
+    
+    <!-- Review Input Box -->
+    <h2>Add a Review</h2>
+    <div class="stars">
+        {% for i in "12345" %}
+            <span class="star" onclick="addReview({{ i }})">&#9733;</span>
+        {% endfor %}
+    </div>
+    
+    <textarea id="reviewText" placeholder="Write your review here"></textarea>
+    <button onclick="submitReview()">Submit Review</button>
+    
+    <!-- JavaScript for handling star rating and review submission -->
+    <script>
+        function rateBook(reviewId, rating) {
+            // Send an AJAX request to update the rating for the review
+            // You can implement this functionality in your Django views
+            // For now, we'll just update the UI
+            const stars = document.querySelectorAll(`[onclick="rateBook(${reviewId}, ${rating})"]`);
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('checked');
+                } else {
+                    star.classList.remove('checked');
+                }
+            });
+        }
+        
+        function addReview(rating) {
+            // Set the selected rating in the review input box
+            const reviewText = document.getElementById("reviewText");
+            reviewText.value = `Rating: ${rating}/5\n\n`;
+        }
+        
+        function submitReview() {
+            // Get the review text from the input box
+            const reviewText = document.getElementById("reviewText").value;
+            
+            // Extract the rating from the review text
+            const ratingMatch = reviewText.match(/Rating: (\d)\/5/);
+            let rating = 0;
+            if (ratingMatch) {
+                rating = parseInt(ratingMatch[1]);
+            }
+            
+            // Send an AJAX request to submit the review
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/submit_review/", true); // Use the actual URL pattern
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Review submitted successfully
+                    const response = JSON.parse(xhr.responseText);
+                    
+                    // Add the new review to the UI
+                    const reviewsList = document.getElementById("reviews");
+                    const newReview = document.createElement("li");
+                    newReview.innerHTML = `
+                        <div class="stars">
+                            <span class="star checked">&#9733;</span>`.repeat(rating) + `
+                            <span class="star">&#9733;</span>`.repeat(5 - rating) + `
+                        </div>
+                        <p>${response.comment}</p>`;
+                    reviewsList.appendChild(newReview);
+                    
+                    // Clear the review input box
+                    document.getElementById("reviewText").value = "";
+                }
+            };
+            
+            // Send the review data as JSON
+            const data = JSON.stringify({ rating: rating, comment: reviewText });
+            xhr.send(data);
+        }
+    </script>
+</body>
+</html>

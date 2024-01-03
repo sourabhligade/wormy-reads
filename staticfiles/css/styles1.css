@@ -1,0 +1,141 @@
+.books-header {
+  background-color: #000; /* Black background */
+  color: #fff; /* White text color */
+  text-align: center; /* Center the text */
+  padding: 1rem; /* Add some padding */
+  font-size: 2rem; /* Set the font size */
+  font-weight: bold; /* Make the font bold */
+}
+
+
+
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  margin: auto;
+  max-width: 1200px; /* Adjust the max-width as needed for your design */
+}
+
+.book-grid-item {
+  display: flex;
+  height: auto; /* Height can adjust based on content */
+  border: 1px solid black;  position: relative;
+  align-items: center; /* Center the content horizontally */
+  justify-content: space-between; /* Space between image and button */
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for smooth hover effect */
+}
+
+.book-grid-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+}
+
+/* Consolidated .book-cover styles */
+.book-cover {
+  display: block;
+  width: 100%; /* Full width of the container */
+  height: 150px;
+  object-fit: cover;
+  width: 100%; /* Ensures the image takes up the full width of the grid item */
+  height: 100%; /* Ensures the image takes up the full height of the grid item */
+  object-fit: contain; /* Ensures the image covers the grid item, cropping if necessary */
+  object-position: center; /* Centers the image within the grid item */
+  margin-bottom: 0.5rem; /* Add some space between the image and the button */
+
+}
+
+.book-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Center content horizontally */
+
+}
+
+/* Adjust max-width to be consistent */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  margin: auto;
+  max-width: 1200px; /* Match the max-width with .book-list for consistency */
+}
+
+/* Removed .item as it seems redundant */
+
+.book-title, .book-author {
+  color: #c15252; /* Reddish color for text */
+  font-size: 1em; /* Adjust size as needed */
+  font-weight: bold; /* Make the font bold */
+}
+
+.more-info-link {
+  text-decoration: none;
+  color: white;
+  background-color: #007bff;
+  padding: 0.5rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Added box-shadow and transform transitions */
+  bottom: 0.5rem; /* Adjust as needed for the exact positioning */
+  width: calc(100% - 4rem); /* Subtract the total padding from the width */
+  padding: 0.3rem;
+}
+
+.more-info-link:hover {
+  background-color: #0056b3;
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .book-list, .container {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+}
+
+.search-container {
+  text-align: center;
+  padding: 1rem;
+}
+
+.search-bar {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  width: 50%; /* Adjust the width as needed */
+}
+
+.search-button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 768px) {
+  .search-bar {
+    width: 70%; /* Larger width on smaller screens */
+  }
+}
+
+

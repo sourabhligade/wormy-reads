@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Latest Reviews</h1>
+<!-- Loop through reviews passed from the view -->
+{% for review in reviews %}
+    <div class="review">
+        <h2>{{ review.book.title }}</h2>
+        <p>Rating: {{ review.rating }} / 5</p>
+        <p>{{ review.comment }}</p>
+        <p>Reviewed by: {{ review.user }}</p>
+    </div>
+{% endfor %}
+{% endblock %}

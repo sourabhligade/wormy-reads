@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Book Collection</title>
+  <!-- Include your stylesheet once in the head -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles1.css' %}">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="{% url 'books:home' %}" class="navbar-link">WormyReads</a>
+<a href="{% url 'books:home' %}" class="navbar-link">Home</a>
+    </div>
+    <div class="navbar-right">
+      <form action="{% url 'books:search_results' %}" method="GET" class="search-form">
+        <input type="text" placeholder="Search by name..." name="search_query" class="search-bar">
+        <button type="submit" class="search-button">Search</button>
+      </form>
+      <a href="{% url 'books:login' %}" class="navbar-link">Login</a>
+      <a href="{% url 'books:signup' %}" class="navbar-link">Signup</a>
+    </div>
+  </nav>
+
+  <div class="books-header">
+    Books
+  </div>
+  
+  <div class="container">
+    {% for book in books %}
+      <div class="book-grid-item">
+        <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" class="book-cover">
+        <div class="book-info">
+          <h2 class="book-title">{{ book.title }}</h2>
+          <p class="book-author">{{ book.author }}</p>
+        </div>
+        <a href="{% url 'books:book_detail' book.id %}" class="more-info-link">More Info</a>
+      </div>
+    {% endfor %}
+  </div>
+
+</body>
+</html>
