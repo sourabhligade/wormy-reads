@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Book, Review
+from .models import Book
+from .forms import BookAdminForm
 
-admin.site.register(Book)
-admin.site.register(Review)
+@admin.register(Book)
+class BookAdmin(admin.ModelAdmin):
+    form = BookAdminForm

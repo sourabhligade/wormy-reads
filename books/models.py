@@ -1,5 +1,23 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
+
+
+class Genre(models.Model):
+    GENRE_CHOICES = [
+        ('FICTION', 'Fiction'),
+        ('NON-FICTION', 'Non-Fiction'),
+        ('AUTOBIOGRAPHY', 'Autobiography'),
+        ('NOVELS', 'Novels'),
+        ('THRILLERS', 'Thrillers'),
+        ('HISTORY', 'History'),
+        ('POETRY', 'Poetry'),
+    ]
+
+    name = models.CharField(max_length=20, choices=GENRE_CHOICES)
+
+    def __str__(self):
+        return self.name
 
 
 class Book(models.Model):
@@ -7,7 +25,7 @@ class Book(models.Model):
     author = models.CharField(max_length=255)
     description = models.TextField()
     cover_image = models.ImageField(upload_to='covers/')
-
+    genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
 
 
 
@@ -25,3 +43,6 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.book.title} by {self.user}"
+    
+
+

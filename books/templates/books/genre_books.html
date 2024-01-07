@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ genre }} Books</title>
+</head>
+<body>
+    <h1>{{ genre }} Books</h1>
+    {% csrf_token %}
+
+    <ul>
+        {% for book in books %}
+            <li>
+                <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" class="book-cover">
+                {{ book.title }}
+            </li>
+        {% empty %}
+            <li>No {{ genre|lower }} books found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

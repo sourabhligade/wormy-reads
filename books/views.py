@@ -9,11 +9,14 @@ from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, 
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect
 from .models import Review
-from .forms import BookForm
+from .forms import BookAdminForm
 from django.db.models import Q
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from .models import  Book,Genre
+from django.db.models.functions import Lower
+
 
 
 
@@ -27,12 +30,9 @@ def book_detail(request, pk):
     book = get_object_or_404(Book, pk=pk)
     return render(request, 'books/book_detail.html', {'book': book})
 
-@login_required
 def home(request):
     # Fetch the latest 5 books from the database
-    latest_books = Book.objects.all().order_by('-id')[:5]  # assuming newer books have a higher ID
-
-    # Pass the books to the template
+    latest_books = Book.objects.all().order_by('-id')[:34]  # assuming newer books have a higher ID
     return render(request, 'books/home.html', {'latest_books': latest_books})
 
 def login_view(request):
@@ -88,11 +88,7 @@ def top_rated(request):
     top_rated_books = Book.objects.all().order_by('-average_rating')[:10]
     return render(request, 'books/top_rated.html', {'books': top_rated_books})
 
-def genres(request):
-    # Assuming you have a 'genre' field in your Book model
-    # This will get all unique genres
-    unique_genres = Book.objects.values_list('genre', flat=True).distinct()
-    return render(request, 'books/genres.html', {'genres': unique_genres})
+
 
 
 def community(request):
@@ -111,17 +107,26 @@ def about(request):
 
 def add_book(request):
     if request.method == 'POST':
-        # If the request method is POST, it means the user submitted the form
-        form = BookForm(request.POST, request.FILES)
+        form = BookAdminForm(request.POST, request.FILES)
 
         if form.is_valid():
-            # If the form is valid, save the book to the database
-            form.save()
-            # Redirect to the book list view after successfully adding the book
-            return redirect('books:book_list')
+            book = form.save(commit=False)
+            genre_name = form.cleaned_data['genre']
+            try:
+                genre = Genre.objects.get(name=genre_name)
+                book.genre = genre
+                book.save()
+                return redirect('books:book_list')
+            except Genre.DoesNotExist:
+                messages.error(request, 'Invalid genre selected.')
+        else:
+            messages.error(request, 'Invalid form data. Please check the form fields.')
     else:
-        # If the request method is not POST (e.g., GET), display an empty form
-        form = BookForm()
+        form = BookAdminForm()
+
+    return render(request, 'books/add_book.html', {'form': form})
+
+
 
 def search_results(request):
     search_query = request.GET.get('search_query', '').strip()
@@ -137,6 +142,8 @@ def search_results(request):
 
     return render(request, 'books/search_results.html', {'books': books})
 
+
+@login_required
 def submit_review(request):
     if request.method == 'POST':
         try:
@@ -145,12 +152,21 @@ def submit_review(request):
             comment = data.get('comment')
 
             # Save the review data to your database (e.g., using a Django model)
+            new_review = Review.objects.create(
+                user=request.user,  # Assuming you have a 'user' field in your Review model
+                rating=rating,
+                comment=comment
+            )
 
             response_data = {
                 'success': True,
                 'message': 'Review submitted successfully!',
                 'comment': comment,
             }
+
+            # Print the newly created review for debugging purposes
+            print(f"New Review - Rating: {rating}, Comment: {comment}")
+
             return JsonResponse(response_data)
         except Exception as e:
             response_data = {
@@ -158,3 +174,18 @@ def submit_review(request):
                 'message': 'Error while submitting the review.',
             }
             return JsonResponse(response_data, status=400)
+        
+def genre_books(request, genre_name):
+    try:
+        # Adjust the query to be case-insensitive
+        genre = Genre.objects.get(name__iexact=genre_name.upper())
+        books = Book.objects.filter(genre=genre)
+    except Genre.DoesNotExist:
+        genre = None
+        books = []
+
+    context = {
+        'genre': genre,
+        'books': books,
+    }
+    return render(request, 'books/genre_books.html', context)

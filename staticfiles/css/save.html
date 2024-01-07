@@ -1,0 +1,30 @@
+
+.book-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping to the next line */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+    justify-content: flex-start; /* Adjust alignment if necessary */
+
+}
+
+.book {
+    flex: 0 0 auto; /* Ensure each book cover doesn't grow or shrink */
+    margin-right: 120px; /* Adjust the margin as needed for spacing between book covers */
+
+}
+
+.book:last-child {
+    margin-right: 0; /* Remove margin from the last book cover */
+}
+
+.book-cover {
+    max-width: 40%; /* Ensure the book cover doesn't exceed its container's width */
+    height: auto;
+    position: relative;
+}
+.book-cover-container {
+    max-width: 1px; /* Adjust the maximum width to your desired size */
+    height: auto;
+}

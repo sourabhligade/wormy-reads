@@ -1,25 +1,64 @@
+{% load static %}
 
-<!-- templates/books/home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- ... -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles2home.css' %}">
 </head>
 <body>
-    <h1>Welcome to the Home Page</h1>
-    <p>This is the home page of your book application.</p>
+    <!-- Header Section -->
+    <header>
+        Wormy<span class="reads">Reads</span>
+    </header>
 
-    <!-- Display the latest books -->
+    <!-- Navigation Section -->
+    <nav class="secondary-nav">
+        <ul>
+            <li><a href="{% url 'books:genre_books' 'FICTION' %}">FICTION</a></li>
+            <li><a href="{% url 'books:genre_books' 'NON-FICTION' %}">NON-FICTION</a></li>
+            <li><a href="{% url 'books:genre_books' 'AUTOBIOGRAPHY' %}">AUTOBIOGRAPHY</a></li>
+            <li><a href="{% url 'books:genre_books' 'NOVELS' %}">NOVELS</a></li>
+            <li><a href="{% url 'books:genre_books' 'THRILLERS' %}">THRILLERS</a></li>
+            <li><a href="{% url 'books:genre_books' 'HISTORY' %}">HISTORY</a></li>
+            <li><a href="{% url 'books:genre_books' 'POETRY' %}">POETRY</a></li>
+        </ul>
+    </nav>
+
+    <!-- Image Section -->
+    <div class="image-container">
+        <div class="image-overlay">
+            <img src="{% static 'css/images/homeimage.png' %}" alt="Image Description">
+            <div class="overlay-text">
+                <span class="announcement-text">Announcing the</span><br>
+                <span class="best-books">Best Books</span><br>
+                <span class="year-text">of 2024</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Book List Section -->
     <ul class="book-list">
         {% for book in latest_books %}
             <li class="book">
-                <h2>{{ book.title }}</h2>
-                <p>Author: {{ book.author }}</p>
-                <p>Description: {{ book.description }}</p>
+                <a href="{% url 'books:book_list' %}">
+                    <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" class="book-cover">
+                </a>
             </li>
         {% empty %}
             <li>No books found.</li>
         {% endfor %}
     </ul>
+
+    <!-- Login/Signup Box -->
+    <div class="login-signup-box">
+        
+        <div class="square-box">
+            <button id="login-button">Login</button>
+            <button id="signup-button">Signup</button>
+        </div>
+    </div>
+
+    
+    
 </body>
 </html>

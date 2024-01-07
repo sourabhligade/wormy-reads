@@ -8,12 +8,11 @@ body, h1, p, ul, li, div {
 body {
     background-color: #f0f0f0;
     color: #333;
-    font-family: Arial, sans-serif;
 }
 
 /* Style the header */
 h1 {
-    background-color: #007bff; /* Header background color */
+    background-color: black; /* Header background color */
     color: #fff; /* Header text color */
     padding: 20px; /* Add spacing around the header text */
 }
@@ -24,7 +23,7 @@ h1 {
     padding: 20px; /* Add spacing around the book content */
     margin: 20px; /* Add margin to separate it from other content */
     border-radius: 5px; /* Add rounded corners to the container */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
 }
 
 /* Style the book cover image */
@@ -35,14 +34,55 @@ h1 {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Add a slight shadow to the image */
 }
 
-/* Style book details */
 .book-details {
-    margin-top: 20px; /* Add spacing between the book cover and details */
+    display: flex;
+    align-items: center;
 }
 
-/* Style the review section */
-.reviews {
-    margin-top: 20px; /* Add spacing between the book details and reviews */
+.book-label {
+    font-weight: bold; /* Darken the labels */
+    margin-top: 10px; /* Add space above each label */
+    font-size: 15px;
+}
+
+.book-info .book-label,
+.book-description .book-label {
+    font-weight: bold; /* Darken the labels */
+    margin-top: 10px; /* Add space above each label */
+    margin-bottom: 10px;
+    font-size: 30px;
+    margin-left: 1rem;
+}
+
+.book-description {
+    font-size: 18px; /* Adjust the font size as needed */
+    line-height: 1.5; /* Adjust the line height for better readability */
+    margin-left: 1rem;
+}
+
+/* Style the "Add to Wishlist" button */
+#addToWishlist {
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    padding: 15px 30px; /* Increase padding for larger button size */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Add rounded corners to the button */
+    cursor: pointer;
+    font-size: 18px; /* Adjust the font size of the button text */
+    transition: background-color 0.3s, transform 0.3s; /* Add smooth hover effect */
+    margin-top: 20px; /* Add space between the button and book cover */
+    margin-left: 92px; /* Adjust the button's left margin */
+}
+
+/* Style the "Add to Wishlist" button on hover */
+#addToWishlist:hover {
+    background-color: #0056b3; /* Darker background color on hover */
+    transform: scale(1.05); /* Increase button size on hover */
+}
+
+/* Style the "Add to Wishlist" button when it's added to the wishlist */
+#addToWishlist.added {
+    background-color: green; /* Change the background color to green when added to wishlist */
 }
 
 /* Style individual reviews */
@@ -52,6 +92,36 @@ h1 {
     border: 1px solid #ddd; /* Add a border around each review */
     border-radius: 5px; /* Add rounded corners to each review */
     margin-bottom: 10px; /* Add spacing between reviews */
+}
+
+.reviews {
+    text-align: center;
+    margin-top: 20px;
+}
+
+textarea#reviewText {
+    width: 100%; /* Make the textarea full width */
+    height: 150px; /* Increase the height of the review box */
+    margin-bottom: 10px; /* Add spacing between the review box and the submit button */
+    font-size: 18px; /* Adjust the font size of the review text */
+    padding: 10px; /* Increase padding for better input experience */
+}
+
+/* Style the submit button */
+button#submitReview {
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    padding: 10px 10px; /* Increase padding for larger button size */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Add rounded corners to the button */
+    cursor: pointer;
+    font-size: 18px; /* Adjust the font size of the button text */
+    transition: background-color 0.3s; /* Add a smooth hover effect */
+    size: 0px;
+}
+
+button#submitReview:hover {
+    background-color: #0056b3; /* Darker background color on hover */
 }
 
 /* Style the star rating */
@@ -67,4 +137,35 @@ h1 {
 
 .star.checked {
     color: #f1c40f; /* Checked star color (darker yellow) */
+}
+
+/* CSS for the navigation bar */
+.navbar {
+    background-color: black; /* Set the background color to black */
+    color: white; /* Text color for the links */
+    padding: 30px; /* Add spacing around the links */
+    text-align: center; /* Center-align the links */
+}
+.wormy-link {
+    font-size: 24px; /* Increase the font size for WormyReads */
+    margin-right: 200px; /* Add spacing between WormyReads and Home */
+    text-decoration: none; /* Remove underline from links */
+    color: rgb(161, 16, 16); /* Text color for the links */
+}
+
+/* Style the Home link */
+.home-link {
+    font-size: 18px; /* Font size for Home */
+    text-decoration: none; /* Remove underline from links */
+    color: rgb(168, 14, 14); /* Text color for the links */
+}
+.navbar a {
+    text-decoration: none; /* Remove underline from links */
+    color: white; /* Text color for the links */
+    margin: 0 10px; /* Add spacing between links */
+    font-size: 18px; /* Adjust the font size of the links */
+}
+
+.navbar a:hover {
+    text-decoration: underline; /* Add underline on hover */
 }

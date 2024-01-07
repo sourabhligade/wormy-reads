@@ -1,11 +1,4 @@
-.books-header {
-  background-color: #000; /* Black background */
-  color: #fff; /* White text color */
-  text-align: center; /* Center the text */
-  padding: 1rem; /* Add some padding */
-  font-size: 2rem; /* Set the font size */
-  font-weight: bold; /* Make the font bold */
-}
+
 
 
 
@@ -138,4 +131,104 @@
   }
 }
 
+/* Add this to your CSS for styling the header */
+.header {
+  background-color: black;
+  padding: 1em 0;
+  display: flex;
+  align-items: center;
+  
+}
+
+/* Style for the logo link */
+.logo {
+  color: white; /* Set font color to white */
+  text-decoration: none; /* Remove underlines from links */
+  font-size: 1.5rem; /* Adjust the font size as needed */
+  margin-right: 4rem; /* Add margin to the right to create space between "WormyReads" and "Home" */
+  font-size: 2.6rem;
+  margin-left: 1rem;
+}
+
+/* Style for the search bar */
+.search-form {
+  display: flex; /* Make the form items flex */
+  align-items: center; /* Center items vertically */
+}
+
+.search-bar {
+  padding: 0.5rem; /* Reduce the padding to make the search bar smaller */
+  margin-right: 1rem; /* Add margin to the right of the search bar to create space */
+  font-size: 1rem;
+  border: 1px solid white; /* Set the border color to white */
+  border-radius: 0.25rem;
+  width: 29rem; /* Adjust the width as needed to make it smaller */
+  background-color: rgb(246, 240, 240); /* Set the background color to black */
+  color: black; /* Set text color to white */
+}
+
+.search-button {
+  padding: 0.5rem 1rem;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 0.3rem; /* Add margin to the left of the search button to create space */
+  margin-right: 14rem;
+}
+
+.search-button:hover {
+  background-color: lightblue;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.black-band {
+  background-color: black; /* Set the background color to black */
+  padding: 1rem 0; /* Add padding to create space at the top and bottom of the black band */
+  display: flex; /* Make the elements inside the black band flex containers */
+  justify-content: space-between; /* Space the elements evenly */
+  align-items: center; /* Center items vertically */
+}
+.navbar-link.home-link {
+  color: #FFA500; /* Change the color to orange (you can use any color you prefer) */
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+/* Style for the Home button link */
+.navbar-link.home-link {
+  color: white; /* Set the text color to white */
+  text-decoration: none;
+  font-size: 1rem;
+  margin-left: auto; /* Push the buttons to the right */
+  margin-right: 2rem; /* Add margin to the right to create space between "Home" and the search bar */
+  font-size: 1.5rem;
+
+}
+
+/* Style for the Login and Signup buttons links */
+.navbar-link.login-link,
+.navbar-link.signup-link {
+  color: white; /* Set the text color to white */
+  text-decoration: none;
+  font-size: 1rem;
+  margin-left: 2rem; /* Add space between the buttons */
+  font-size: 1.3rem;
+
+}
+
+
+.header::after {
+  content: "";
+  display: block;
+  border: 2px solid black; /* Add a black border */
+  border-radius: 0px; /* Adjust the border-radius to round the corners */
+}
 

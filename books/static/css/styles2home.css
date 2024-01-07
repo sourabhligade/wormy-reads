@@ -1,0 +1,199 @@
+/* css/styles2home.css */
+
+header {
+    color:white; /* Change to your desired text color */
+    text-align: center;
+    padding: 20px; /* Adjust padding as needed */
+    font-weight: bolder;
+    display: block;
+    font-size: 3.4rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: oblique;
+    text-decoration: underline;
+    box-shadow: inset;
+    background-color: black;
+
+}
+body {
+    margin: 0;
+    padding: 0;
+  }
+
+
+
+
+  .site-header {
+    text-align: center;
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+h1 {
+    font-size: 3rem; /* Adjust font size as needed */
+}
+
+.primary-nav,
+.secondary-nav {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.secondary-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.secondary-nav li {
+    margin: 0 15px;
+}
+.secondary-nav a {
+    text-decoration: none;
+    color: black; /* Adjust the color as needed */
+    padding: 10px 0; /* Adjust padding as needed */
+    display: block;
+    transition: color 0.3s, background-color 0.3s; /* Smooth transition for color and background */
+}
+
+.secondary-nav a:hover {
+    color: #007bff; /* Change text color on hover */
+    background-color: #f8f9fa; /* Add a subtle background color on hover */
+    text-decoration: underline;
+    text-shadow: black;
+}
+
+/* Ensure you also include styles for the rest of your header and primary-nav if it has not been styled yet */
+
+/* Add other styles as needed */
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: min-content;
+
+}
+
+/* Style for the image */
+.image-container img {
+    margin-top: 2rem;
+    width: 100%;
+    max-width: none /* Ensure the image doesn't exceed its container's width */
+
+}
+.image-overlay {
+    position: relative;
+    
+}
+
+/* Style for stretching the image horizontally */
+.stretch-horizontal {
+    width: 100%;
+    height: auto;
+    max-width: none;
+    max-height: none;
+}
+
+/* Style for the overlay text */
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    display: inline;
+    font-size: larger;
+    background-color: black;
+    right: 35%;
+    transform: translate(-50%, -50%);
+    color: white;
+    padding: 22px;
+    font-size: 74px;
+    font-weight: bold;
+    text-align: left;
+}
+
+
+.best-books {
+font-family: Georgia, 'Times New Roman', Times, serif
+};
+
+.login-signup-box {
+    position: absolute;
+    top: 20px; /* Adjust the top position as needed */
+    right: 20px; /* Adjust the right position as needed */
+    background-color: #fff; /* Background color for the box */
+    padding: 20px; /* Add padding as needed */
+    border-radius: 10px; /* Add rounded corners to the box */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+    z-index: 999; /* Ensure it's above the image */
+}
+
+.square-box {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    width: 200px; /* Set a fixed width for the square container */
+    height: 200px; /* Set a fixed height to make it square */
+    display: flex; /* Use flexbox to center the buttons */
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center horizontally */
+    size: 2rem;
+    background-color: black;
+    justify-content: space-around; /* Add space between buttons */
+}
+
+#login-button, #signup-button {
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button border */
+    padding: 10px 20px; /* Button padding */
+    font-size: 18px; /* Button font size */
+    cursor: pointer; /* Add pointer cursor on hover */
+}
+
+#login-button:hover, #signup-button:hover {
+    background-color: #0056b3; /* Button background color on hover */
+}
+
+
+/* Add this CSS to your existing styles2home.css file */
+
+.book-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping to the next line */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+    animation: slide 100s linear infinite; /* Adjust the duration (10s) as needed */
+
+    
+}
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%); /* Adjust the percentage to control the speed of the slide */
+    }
+}
+
+.book {
+    flex: 0 0 auto; /* Ensure each book cover doesn't grow or shrink */
+    margin-right: 10px; /* Adjust the margin as needed for spacing between book covers */
+}
+
+
+.book {
+    flex: 0 0 auto; /* Ensure each book cover doesn't grow or shrink */
+    margin-right: 10px; /* Adjust the margin as needed for spacing between book covers */
+}
+
+.book:last-child {
+    margin-right: 0; /* Remove margin from the last book cover */
+}
+
+.book-cover {
+    max-width: 150px; /* Adjust the maximum width to your desired size */
+    height: auto;
+}
+.book:hover {
+    transform: scale(1.1); /* Scale the book cover by 5% on hover */
+}
+

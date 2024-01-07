@@ -1,3 +1,4 @@
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -11,25 +12,24 @@
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="navbar-left">
-      <a href="{% url 'books:home' %}" class="navbar-link">WormyReads</a>
-<a href="{% url 'books:home' %}" class="navbar-link">Home</a>
-    </div>
-    <div class="navbar-right">
+  <div class="black-band">
+    <header class="header">
+      <a href="{% url 'books:home' %}" class="navbar-link logo">WormyReads</a>
+      <a href="{% url 'books:home' %}" class="navbar-link home-link">Home</a>
+      
+
       <form action="{% url 'books:search_results' %}" method="GET" class="search-form">
+        
         <input type="text" placeholder="Search by name..." name="search_query" class="search-bar">
         <button type="submit" class="search-button">Search</button>
-      </form>
-      <a href="{% url 'books:login' %}" class="navbar-link">Login</a>
-      <a href="{% url 'books:signup' %}" class="navbar-link">Signup</a>
-    </div>
-  </nav>
+        <a href="{% url 'books:login' %}" class="navbar-link login-link">Login</a>
+        <a href="{% url 'books:signup' %}" class="navbar-link signup-link">Signup</a>
 
-  <div class="books-header">
-    Books
+
+      </form>
+    </header>
   </div>
-  
+
   <div class="container">
     {% for book in books %}
       <div class="book-grid-item">

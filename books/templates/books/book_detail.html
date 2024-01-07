@@ -1,3 +1,4 @@
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -5,10 +6,20 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles1bookdetail.css' %}">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ book.title }} - Book Details</title>
+
+    <div class="navbar"> 
+        <!-- Add your navigation links here -->
+        <a href="{% url 'books:book_list' %}" class="wormy-link">WormyReads</a>
+        <a href="{% url 'books:home' %}" class="home-link">Home</a>
+
+        <!-- Add more links as needed -->
+    </div>
+    
     <style>
+
+
         /* CSS for the star rating */
         .stars {
             display: inline-block;
@@ -21,51 +32,74 @@
 
         .star.checked {
             color: gold;
+
+        .book-description {
+            font-size: 18px; /* Adjust the font size as needed */
+            line-height: 1.5; /* Adjust the line height for better readability */
+            .wishlist-button {
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text color */
+            padding: 15px 30px; /* Increase padding for larger button size */
+            border: none; /* Remove button border */
+            border-radius: 5px; /* Add rounded corners to the button */
+            cursor: pointer;
+            font-size: 18px; /* Adjust the font size of the button text */
+            transition: background-color 0.3s; /* Add a smooth hover effect */
         }
+
+        }
+        }
+    
     </style>
 </head>
 <body>
-    <h1>{{ book.title }}</h1>
+    <div class="book-container">
+        <div class="book-details">
+            <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" class="book-cover">
+            <div class="book-info">
+                <h1 class="book-title">{{ book.title }}</h1>
+                <p class="book-label"><strong>Author:</strong> {{ book.author }}</p>
+                <p class="book-label"><strong>Book Description:</strong></p>
+                <p class="book-description">{{ book.description }}</p>
+
+            </div>
+        </div>
+        <button id="addToWishlist" onclick="addToWishlist()">Add to Wishlist</button> <!-- Add Wishlist Button Here -->
+
     
-    <!-- Display the book image -->
-    <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" width="200">
+        <!-- Display existing reviews -->
+        <h2>Reviews</h2>
+        <ul id="reviews">
+            {% for review in book.reviews.all %}
+                <li>
+                    <div class="stars">
+                        {% for i in "12345" %}
+                            <span class="star {% if i <= review.rating %}checked{% endif %}" onclick="rateBook({{ review.id }}, {{ i }})">&#9733;</span>
+                        {% endfor %}
+                    </div>
+                    <p>{{ review.comment }}</p>
+                </li>
+            {% empty %}
+                <li>No reviews yet.</li>
+            {% endfor %}
+        </ul>
     
-    <p>Author: {{ book.author }}</p>
-    <p>Published Year: {{ book.published_year }}</p>
+        <!-- Review Input Box -->
+        <h2>Add a Review</h2>
+        <div class="stars">
+            {% for i in "12345" %}
+                <span class="star" onclick="addReview({{ i }})">&#9733;</span>
+            {% endfor %}
+        </div>
     
-    <!-- Display the book description -->
-    <p>Description: {{ book.description }}</p>
-    
-    <!-- Display existing reviews -->
-    <h2>Reviews</h2>
-    <ul id="reviews">
-        {% for review in book.reviews.all %}
-            <li>
-                <div class="stars">
-                    {% for i in "12345" %}
-                        <span class="star {% if i <= review.rating %}checked{% endif %}" onclick="rateBook({{ review.id }}, {{ i }})">&#9733;</span>
-                    {% endfor %}
-                </div>
-                <p>{{ review.comment }}</p>
-            </li>
-        {% empty %}
-            <li>No reviews yet.</li>
-        {% endfor %}
-    </ul>
-    
-    <!-- Review Input Box -->
-    <h2>Add a Review</h2>
-    <div class="stars">
-        {% for i in "12345" %}
-            <span class="star" onclick="addReview({{ i }})">&#9733;</span>
-        {% endfor %}
+        <textarea id="reviewText" placeholder="Write your review here"></textarea>
+        <button id="submitReview" onclick="submitReview()">Submit Review</button>
     </div>
-    
-    <textarea id="reviewText" placeholder="Write your review here"></textarea>
-    <button onclick="submitReview()">Submit Review</button>
     
     <!-- JavaScript for handling star rating and review submission -->
     <script>
+        const csrfToken = "{{ csrf_token }}"; // Define the csrfToken variable
+
         function rateBook(reviewId, rating) {
             // Send an AJAX request to update the rating for the review
             // You can implement this functionality in your Django views
@@ -85,7 +119,22 @@
             const reviewText = document.getElementById("reviewText");
             reviewText.value = `Rating: ${rating}/5\n\n`;
         }
-        
+
+        let isAddedToWishlist = false; // Initialize the variable
+
+function addToWishlist() {
+    const wishlistButton = document.getElementById("addToWishlist");
+    if (!isAddedToWishlist) {
+        // Add the book to the wishlist (you can implement this logic)
+        wishlistButton.textContent = "Added to Wishlist";
+        wishlistButton.classList.add("added"); // Add the 'added' class to change the background color
+    } else {
+        // Remove the book from the wishlist (you can implement this logic)
+        wishlistButton.textContent = "Add to Wishlist";
+        wishlistButton.classList.remove("added"); // Remove the 'added' class to revert the background color
+    }
+    isAddedToWishlist = !isAddedToWishlist;
+} 
         function submitReview() {
             // Get the review text from the input box
             const reviewText = document.getElementById("reviewText").value;
@@ -96,6 +145,8 @@
             if (ratingMatch) {
                 rating = parseInt(ratingMatch[1]);
             }
+
+
             
             // Send an AJAX request to submit the review
             const xhr = new XMLHttpRequest();
