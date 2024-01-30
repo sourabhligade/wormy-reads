@@ -1,0 +1,13 @@
+{% block content %}
+    <h1>{{ request.user.username }}'s Wishlist</h1>
+    {% if wishlist.books.all %}
+        <ul>
+            {% for book in wishlist.books.all %}
+                <li>{{ book.title }}</li>
+                <!-- Add more details about the book as needed -->
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Your wishlist is empty.</p>
+    {% endif %}
+{% endblock %}

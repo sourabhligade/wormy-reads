@@ -15,7 +15,7 @@
       <div class="book-result">
         <img src="{{ book.cover_image.url }}" alt="{{ book.title }}">
         <h2 class="book-title">{{ book.title }}</h2>
-        <a href="{% url 'books:book_detail' book.id %}" class="more-info-link">More Info</a>
+        <a href="{% url 'books:book_detail' book.id %}" class="blue-button more-info-link">More Info</a>
         
       </div>
     {% empty %}
@@ -26,5 +26,5 @@
   
   <!-- Add styling as needed for book images, titles, and the "More Info" link -->
   
-  <a href="{% url 'books:book_list' %}">Back to All Books</a>
-{% endblock %}
+  <a href="{% url 'books:book_list' %}" class="blue-button">Back to All Books</a>
+  {% endblock %}

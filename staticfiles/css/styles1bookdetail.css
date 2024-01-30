@@ -61,18 +61,7 @@ h1 {
 }
 
 /* Style the "Add to Wishlist" button */
-#addToWishlist {
-    background-color: #007bff; /* Button background color */
-    color: #fff; /* Button text color */
-    padding: 15px 30px; /* Increase padding for larger button size */
-    border: none; /* Remove button border */
-    border-radius: 5px; /* Add rounded corners to the button */
-    cursor: pointer;
-    font-size: 18px; /* Adjust the font size of the button text */
-    transition: background-color 0.3s, transform 0.3s; /* Add smooth hover effect */
-    margin-top: 20px; /* Add space between the button and book cover */
-    margin-left: 92px; /* Adjust the button's left margin */
-}
+
 
 /* Style the "Add to Wishlist" button on hover */
 #addToWishlist:hover {
@@ -144,28 +133,66 @@ button#submitReview:hover {
     background-color: black; /* Set the background color to black */
     color: white; /* Text color for the links */
     padding: 30px; /* Add spacing around the links */
-    text-align: center; /* Center-align the links */
+    font-size: large;
+    display: flex; /* Use flexbox to control the layout */
+    justify-content: space-between; /* Distribute items evenly, pushing Wormy to the left and Wishlist to the right */
+    align-items: center; /* Center vertically */
 }
+
+
+
+.wormy-link, .home-link, .wishlist-link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s; /* Add a smooth color transition effect */
+
+    /* ... other styles ... */
+}
+
 .wormy-link {
-    font-size: 24px; /* Increase the font size for WormyReads */
-    margin-right: 200px; /* Add spacing between WormyReads and Home */
-    text-decoration: none; /* Remove underline from links */
-    color: rgb(161, 16, 16); /* Text color for the links */
+    font-size: 32px;
 }
 
-/* Style the Home link */
 .home-link {
-    font-size: 18px; /* Font size for Home */
-    text-decoration: none; /* Remove underline from links */
-    color: rgb(168, 14, 14); /* Text color for the links */
-}
-.navbar a {
-    text-decoration: none; /* Remove underline from links */
-    color: white; /* Text color for the links */
-    margin: 0 10px; /* Add spacing between links */
-    font-size: 18px; /* Adjust the font size of the links */
+    margin-left: 12rem;
+    text-align: center;
+    margin-left: 2rem;
+    font-size: 20px;
 }
 
-.navbar a:hover {
-    text-decoration: underline; /* Add underline on hover */
+.wishlist-link {
+    margin-left: auto; /* Push Wishlist to the right by using auto margin on the left */
+    font-size: 20px;
+}
+/* Apply the hover effect */
+.wormy-link:hover, .home-link:hover, .wishlist-link:hover {
+    color: rgb(91, 91, 180); /* Change the text color to blue on hover */
+}
+
+.wishlist-button {
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    padding: 15px 30px; /* Increase padding for larger button size */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Add rounded corners to the button */
+    cursor: pointer;
+    margin-top: 20px; /* Add some space between the image and the button */
+    margin-left: 8rem;
+   
+    align-items: center;
+    font-size: 18px; /* Adjust the font size of the button text */
+    transition: background-color 0.3s; /* Add a smooth hover effect */
+}
+.image-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers items horizontally */
+    justify-content: center; /* Ce
+    /* Other styles if needed, like width, etc. */
+}
+
+#addToWishlist.added {
+    background-color: green; /* Change the background color to green */
+    /* Add any other style changes you want for the added state */
 }

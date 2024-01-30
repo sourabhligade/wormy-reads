@@ -86,4 +86,17 @@ button:hover {
 
 
 
-  
+.blue-button {
+    background-color: blue; /* Blue background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding around text */
+    text-decoration: none; /* Removes underline from links */
+    border-radius: 5px; /* Rounded corners */
+    display: inline-block; /* Align properly with other inline elements */
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.blue-button:hover {
+    background-color: darkblue; /* Darker blue on hover for a nice effect */
+}

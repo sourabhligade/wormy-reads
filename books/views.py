@@ -14,8 +14,12 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from .models import  Book,Genre
+from .models import  Book,Genre,Wishlist
 from django.db.models.functions import Lower
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
+import logging
+
 
 
 
@@ -189,3 +193,30 @@ def genre_books(request, genre_name):
         'books': books,
     }
     return render(request, 'books/genre_books.html', context)
+
+
+
+logger = logging.getLogger(__name__)
+
+@csrf_exempt
+@login_required
+def add_to_wishlist(request):
+    if request.method == 'POST':
+        book_id = request.POST.get('bookId')
+        try:
+            book = Book.objects.get(id=book_id)
+            request.user.wishlist.add(book)
+            return JsonResponse({'success': True})
+        except Book.DoesNotExist:
+            return JsonResponse({'error': 'Book not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+@login_required
+def view_wishlist(request):
+    print("Viewing wishlist")  # For debugging
+    wishlist, created = Wishlist.objects.get_or_create(user=request.user)
+    return render(request, 'books/wishlist.html', {'wishlist': wishlist})

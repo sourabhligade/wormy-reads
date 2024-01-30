@@ -1,22 +1,109 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ genre }} Books</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles3genre.css' %}">
+    <style>
+        /* Center-align the header */
+      
+    </style>
 </head>
 <body>
-    <h1>{{ genre }} Books</h1>
-    {% csrf_token %}
+    <div class="black-band">
+        <header class="header">
+            <a href="{% url 'books:home' %}" class="navbar-link logo">WormyReads</a>
+            <a href="{% url 'books:home' %}" class="navbar-link home-link">Home</a>
 
-    <ul>
+            <form action="{% url 'books:search_results' %}" method="GET" class="search-form">
+                <input type="text" placeholder="Search by name..." name="search_query" class="search-bar">
+                <button type="submit" class="search-button">Search</button>
+                <a href="{% url 'books:login' %}" class="navbar-link login-link">Login</a>
+                <a href="{% url 'books:signup' %}" class="navbar-link signup-link">Signup</a>
+            </form>
+        </header>
+    </div>
+    <nav class="secondary-nav">
+        <ul>
+            <li><a href="{% url 'books:genre_books' '{{ genre }}' %}">{{ genre }}</a></li>
+            
+
+        </ul>
+    </nav>
+
+    <div class="container">
+        {% csrf_token %}
         {% for book in books %}
-            <li>
-                <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" class="book-cover">
-                {{ book.title }}
-            </li>
+        <div class="book-grid-item">
+            <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" class="book-cover">
+            <div class="book-info">
+                <a href="{% url 'books:book_detail' book.id %}" class="more-info-link">More Info</a>
+            </div>
+        </div>
         {% empty %}
-            <li>No {{ genre|lower }} books found.</li>
+        <p>No {{ genre|lower }} books found.</p>
         {% endfor %}
-    </ul>
-</body>
-</html>
+    </div>
+    
+
+  <div class="flex">
+
+    <div class="flex-container">
+        <div class="column">
+            <div class="company-info">
+                COMPANY
+                <br>
+                About us
+                <br>
+                Careers
+                <br>
+                Terms
+                <br>
+                Privacy
+                <br>
+                Interest Based Ads
+                <br>
+                Ad Preferences
+                <br>
+                Help
+            </div>
+        </div>
+    
+        <div class="column">
+            <div class="work-with-us">
+                WORK WITH US
+                <br>
+                Authors
+                <br>
+                Advertise
+                <br>
+                Authors & ads blog
+                <br>
+                API
+            </div>
+        </div>
+    
+        <div class="column">
+            <div class="connect">
+                CONNECT
+                <br>
+                WormyReads on Facebook
+                <br>
+                WormyReads on Twitter
+                <br>
+                WormyReads on Instagram
+                <br>
+                WormyReads on LinkedIn
+            </div>
+        </div>
+    </div>
+    
+    <div class="center">
+        © 2024 WormyReads, Inc.
+    </div>
+    </body>
+    </html>
+    

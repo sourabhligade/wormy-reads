@@ -1,25 +1,15 @@
-
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles1bookdetail.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ book.title }} - Book Details</title>
+    <title>{{ book.title }}Book Details</title>
 
-    <div class="navbar"> 
-        <!-- Add your navigation links here -->
-        <a href="{% url 'books:book_list' %}" class="wormy-link">WormyReads</a>
-        <a href="{% url 'books:home' %}" class="home-link">Home</a>
-
-        <!-- Add more links as needed -->
-    </div>
-    
     <style>
-
-
         /* CSS for the star rating */
         .stars {
             display: inline-block;
@@ -30,29 +20,27 @@
             cursor: pointer;
         }
 
-        .star.checked {
+        .star.checked { 
             color: gold;
+        }
 
         .book-description {
             font-size: 18px; /* Adjust the font size as needed */
             line-height: 1.5; /* Adjust the line height for better readability */
-            .wishlist-button {
-            background-color: #007bff; /* Button background color */
-            color: #fff; /* Button text color */
-            padding: 15px 30px; /* Increase padding for larger button size */
-            border: none; /* Remove button border */
-            border-radius: 5px; /* Add rounded corners to the button */
-            cursor: pointer;
-            font-size: 18px; /* Adjust the font size of the button text */
-            transition: background-color 0.3s; /* Add a smooth hover effect */
         }
 
-        }
-        }
-    
+        
+
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="{% url 'books:book_list' %}" class="wormy-link">WormyReads</a>
+        <a href="{% url 'books:home' %}" class="home-link">Home</a>
+        <a href="{% url 'books:view_wishlist' %}">View Wishlist</a>
+    </div>
+    
+
     <div class="book-container">
         <div class="book-details">
             <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" class="book-cover">
@@ -61,12 +49,12 @@
                 <p class="book-label"><strong>Author:</strong> {{ book.author }}</p>
                 <p class="book-label"><strong>Book Description:</strong></p>
                 <p class="book-description">{{ book.description }}</p>
-
             </div>
         </div>
-        <button id="addToWishlist" onclick="addToWishlist()">Add to Wishlist</button> <!-- Add Wishlist Button Here -->
+        <button id="addToWishlist" class="wishlist-button" data-book-id="{{ book.id }}" onclick="addToWishlist(this)">Add to Wishlist</button>
 
-    
+
+
         <!-- Display existing reviews -->
         <h2>Reviews</h2>
         <ul id="reviews">
@@ -91,14 +79,64 @@
                 <span class="star" onclick="addReview({{ i }})">&#9733;</span>
             {% endfor %}
         </div>
-    
         <textarea id="reviewText" placeholder="Write your review here"></textarea>
         <button id="submitReview" onclick="submitReview()">Submit Review</button>
     </div>
     
     <!-- JavaScript for handling star rating and review submission -->
     <script>
-        const csrfToken = "{{ csrf_token }}"; // Define the csrfToken variable
+
+function addToWishlist(buttonElement) {
+    const bookId = buttonElement.getAttribute('data-book-id');
+    const xhr = new XMLHttpRequest();
+    const isAdded = buttonElement.classList.contains('added'); // Check if the book is already added
+
+    xhr.open('POST', isAdded ? '/books/remove_from_wishlist/' : '/books/add_to_wishlist/', true); // Use the appropriate URL for add or remove
+
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            if (isAdded) {
+                // If the book was already added, remove it from the wishlist and update the button appearance
+                buttonElement.classList.remove('added');
+            } else {
+                // If the book was not already added, add it to the wishlist and update the button appearance
+                buttonElement.classList.add('added');
+            }
+        } else if (xhr.readyState === 4) {
+            console.error('Error updating wishlist. Status:', xhr.status);
+        }
+    };
+
+    xhr.send('bookId=' + bookId);
+}
+
+
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+        const csrfToken = getCookie('csrftoken');
+
+
+
+
+
 
         function rateBook(reviewId, rating) {
             // Send an AJAX request to update the rating for the review
@@ -114,69 +152,63 @@
             });
         }
         
+
+
+
         function addReview(rating) {
             // Set the selected rating in the review input box
             const reviewText = document.getElementById("reviewText");
             reviewText.value = `Rating: ${rating}/5\n\n`;
         }
 
-        let isAddedToWishlist = false; // Initialize the variable
 
-function addToWishlist() {
-    const wishlistButton = document.getElementById("addToWishlist");
-    if (!isAddedToWishlist) {
-        // Add the book to the wishlist (you can implement this logic)
-        wishlistButton.textContent = "Added to Wishlist";
-        wishlistButton.classList.add("added"); // Add the 'added' class to change the background color
-    } else {
-        // Remove the book from the wishlist (you can implement this logic)
-        wishlistButton.textContent = "Add to Wishlist";
-        wishlistButton.classList.remove("added"); // Remove the 'added' class to revert the background color
-    }
-    isAddedToWishlist = !isAddedToWishlist;
-} 
+    
+
+
         function submitReview() {
-            // Get the review text from the input box
-            const reviewText = document.getElementById("reviewText").value;
-            
-            // Extract the rating from the review text
-            const ratingMatch = reviewText.match(/Rating: (\d)\/5/);
-            let rating = 0;
-            if (ratingMatch) {
-                rating = parseInt(ratingMatch[1]);
-            }
+    // Get the review text from the input box
+    const reviewText = document.getElementById("reviewText").value;
 
+    // Extract the rating from the review text
+    const ratingMatch = reviewText.match(/Rating: (\d)\/5/);
+    let rating = 0;
+    if (ratingMatch) {
+        rating = parseInt(ratingMatch[1]);
+    }
 
+    // Create a new AJAX request
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/books/submit_review/", true); // Use the actual URL pattern
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken')); // Set CSRF token after initializing xhr
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Review submitted successfully
+            const response = JSON.parse(xhr.responseText);
             
-            // Send an AJAX request to submit the review
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "/submit_review/", true); // Use the actual URL pattern
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    // Review submitted successfully
-                    const response = JSON.parse(xhr.responseText);
-                    
-                    // Add the new review to the UI
-                    const reviewsList = document.getElementById("reviews");
-                    const newReview = document.createElement("li");
-                    newReview.innerHTML = `
-                        <div class="stars">
-                            <span class="star checked">&#9733;</span>`.repeat(rating) + `
-                            <span class="star">&#9733;</span>`.repeat(5 - rating) + `
-                        </div>
-                        <p>${response.comment}</p>`;
-                    reviewsList.appendChild(newReview);
-                    
-                    // Clear the review input box
-                    document.getElementById("reviewText").value = "";
-                }
-            };
+            // Add the new review to the UI
+            const reviewsList = document.getElementById("reviews");
+            const newReview = document.createElement("li");
+            newReview.innerHTML = `
+                <div class="stars">
+                    <span class="star checked">&#9733;</span>`.repeat(rating) + `
+                    <span class="star">&#9733;</span>`.repeat(5 - rating) + `
+                </div>
+                <p>${response.comment}</p>`;
+            reviewsList.appendChild(newReview);
             
-            // Send the review data as JSON
-            const data = JSON.stringify({ rating: rating, comment: reviewText });
-            xhr.send(data);
+            // Clear the review input box
+            document.getElementById("reviewText").value = "";
         }
+    };
+    
+    // Send the review data as JSON
+    const data = JSON.stringify({ rating: rating, comment: reviewText });
+    xhr.send(data);
+}
+
     </script>
+
 </body>
 </html>

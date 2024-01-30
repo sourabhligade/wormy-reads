@@ -232,3 +232,35 @@ body {
   border-radius: 0px; /* Adjust the border-radius to round the corners */
 }
 
+
+
+/* Add hover effect to turn text blue */
+
+
+/* Flex container for columns */
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 2rem;
+  margin-right: 12rem;
+}
+
+/* Individual column styles */
+.column {
+  flex: 0 0 30%;
+}
+
+.center {
+ 
+  text-align: center;
+}
+
+.flex{
+padding-top: 42px;
+  background-color: black;
+}
+/* ... rest of your CSS ... */
+body, p, div, span {
+  color: white !important;
+}

@@ -46,3 +46,17 @@ class Review(models.Model):
     
 
 
+class Wishlist(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='wishlist')
+    books = models.ManyToManyField(Book)  # Assuming you have a Book model
+
+    def __str__(self):
+        return f"{self.user}'s Wishlist"
+    
+   
+
+
+
+    
+
+

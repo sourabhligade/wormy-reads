@@ -12,10 +12,13 @@
 </head>
 <body>
 
+
   <div class="black-band">
     <header class="header">
       <a href="{% url 'books:home' %}" class="navbar-link logo">WormyReads</a>
       <a href="{% url 'books:home' %}" class="navbar-link home-link">Home</a>
+
+      
       
 
       <form action="{% url 'books:search_results' %}" method="GET" class="search-form">
@@ -24,7 +27,6 @@
         <button type="submit" class="search-button">Search</button>
         <a href="{% url 'books:login' %}" class="navbar-link login-link">Login</a>
         <a href="{% url 'books:signup' %}" class="navbar-link signup-link">Signup</a>
-
 
       </form>
     </header>
@@ -43,5 +45,62 @@
     {% endfor %}
   </div>
 
+
+
+  <div class="flex">
+
+<div class="flex-container">
+    <div class="column">
+        <div class="company-info">
+            COMPANY
+            <br>
+            About us
+            <br>
+            Careers
+            <br>
+            Terms
+            <br>
+            Privacy
+            <br>
+            Interest Based Ads
+            <br>
+            Ad Preferences
+            <br>
+            Help
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="work-with-us">
+            WORK WITH US
+            <br>
+            Authors
+            <br>
+            Advertise
+            <br>
+            Authors & ads blog
+            <br>
+            API
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="connect">
+            CONNECT
+            <br>
+            WormyReads on Facebook
+            <br>
+            WormyReads on Twitter
+            <br>
+            WormyReads on Instagram
+            <br>
+            WormyReads on LinkedIn
+        </div>
+    </div>
+</div>
+
+<div class="center">
+    © 2024 WormyReads, Inc.
+</div>
 </body>
 </html>

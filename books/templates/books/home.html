@@ -6,7 +6,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles2home.css' %}">
 </head>
 <body>
-    <!-- Header Section -->
+    <div class="white-background">
+
     <header>
         Wormy<span class="reads">Reads</span>
     </header>
@@ -17,10 +18,11 @@
             <li><a href="{% url 'books:genre_books' 'FICTION' %}">FICTION</a></li>
             <li><a href="{% url 'books:genre_books' 'NON-FICTION' %}">NON-FICTION</a></li>
             <li><a href="{% url 'books:genre_books' 'AUTOBIOGRAPHY' %}">AUTOBIOGRAPHY</a></li>
-            <li><a href="{% url 'books:genre_books' 'NOVELS' %}">NOVELS</a></li>
+            <li><a href="{% url 'books:genre_books' 'NON-FICTION' %}">NOVELS</a></li>
             <li><a href="{% url 'books:genre_books' 'THRILLERS' %}">THRILLERS</a></li>
             <li><a href="{% url 'books:genre_books' 'HISTORY' %}">HISTORY</a></li>
             <li><a href="{% url 'books:genre_books' 'POETRY' %}">POETRY</a></li>
+            <a href="{% url 'books:view_wishlist' %}">WISHLIST</a>
         </ul>
     </nav>
 
@@ -48,17 +50,136 @@
             <li>No books found.</li>
         {% endfor %}
     </ul>
+</div>
 
-    <!-- Login/Signup Box -->
-    <div class="login-signup-box">
-        
-        <div class="square-box">
-            <button id="login-button">Login</button>
-            <button id="signup-button">Signup</button>
+<div class="black-background"></div>
+<div class="image-container">
+    <!-- Two images on one line, two below -->
+    <div class="image-box">
+        <div class="quote-image">
+            <img src="{% static 'css/images/quote1.png' %}" alt="Image Description">
+            <div class="quote-overlay">
+                <span class="quote-text">"So many books, so little time."</span>
+                <span class="quote-author">― Frank Zappa</span>
+            </div>
+        </div>
+    </div>
+    <div class="image-box">
+        <div class="quote-image">
+            <img src="{% static 'css/images/quote2.png' %}" alt="Image Description">
+            <div class="quote-overlay">
+                <span class="quote-text">"A room without books is like a body without a soul."</span>
+                <span class="quote-author">― Marcus Tullius Cicero</span>
+            </div>
+        </div>
+    </div>
+    <div class="image-box">
+        <div class="quote-image">
+            <img src="{% static 'css/images/quote3.png' %}" alt="Image Description">
+            <div class="quote-overlay">
+                <span class="quote-text">"The people who are crazy enough to think they can change the world are the ones who do."</span>
+                <span class="quote-author">— Steve Jobs</span>
+            </div>
+        </div>
+    </div>
+    <div class="image-box">
+        <div class="quote-image">
+            <img src="{% static 'css/images/quote4.png' %}" alt="Image Description">
+            <div class="quote-overlay">
+                <span class="quote-text">"Show me a family of readers, and I will show you the people who move the world."</span>
+                <span class="quote-author">– Napoleon Bonaparte</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add this script before the closing </body> tag -->
+<script>
+    const imageBoxes = document.querySelectorAll(".image-box");
+
+    const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.2, // Adjust the threshold as needed
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("animate-fade-in");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    imageBoxes.forEach((imageBox) => {
+        observer.observe(imageBox);
+    });
+</script>
+
+<!-- ... your existing HTML ... -->
+<!-- ... your existing HTML ... --><!-- ... your existing HTML ... -->
+<!-- ... your existing HTML ... -->
+
+<div class="white-thin-line"></div>
+
+<div class="flex-container">
+    <div class="column">
+        <div class="company-info">
+            COMPANY
+            <br>
+            About us
+            <br>
+            Careers
+            <br>
+            Terms
+            <br>
+            Privacy
+            <br>
+            Interest Based Ads
+            <br>
+            Ad Preferences
+            <br>
+            Help
         </div>
     </div>
 
-    
-    
+    <div class="column">
+        <div class="work-with-us">
+            WORK WITH US
+            <br>
+            Authors
+            <br>
+            Advertise
+            <br>
+            Authors & ads blog
+            <br>
+            API
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="connect">
+            CONNECT
+            <br>
+            WormyReads on Facebook
+            <br>
+            WormyReads on Twitter
+            <br>
+            WormyReads on Instagram
+            <br>
+            WormyReads on LinkedIn
+        </div>
+    </div>
+</div>
+
+<div class="center">
+    © 2024 WormyReads, Inc.
+</div>
+
+<!-- ... rest of your HTML ... -->
+
+<!-- ... rest of your HTML ... -->
+
 </body>
 </html>
