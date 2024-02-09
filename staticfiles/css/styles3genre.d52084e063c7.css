@@ -1,0 +1,301 @@
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    margin: auto;
+    max-width: 1200px; /* Adjust the max-width as needed for your design */
+  }
+  
+  .book-grid-item {
+    display: flex;
+    height: auto; /* Height can adjust based on content */
+    border: 1px solid black;  position: relative;
+    align-items: center; /* Center the content horizontally */
+    justify-content: space-between; /* Space between image and button */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for smooth hover effect */
+
+  }
+  
+  .book-grid-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+  }
+  
+  /* Consolidated .book-cover styles */
+  .book-cover {
+    display: block;
+    width: 100%; /* Full width of the container */
+    height: 150px;
+    object-fit: cover;
+    width: 100%; /* Ensures the image takes up the full width of the grid item */
+    height: 100%; /* Ensures the image takes up the full height of the grid item */
+    object-fit: contain; /* Ensures the image covers the grid item, cropping if necessary */
+    object-position: center; /* Centers the image within the grid item */
+    margin-bottom: 0.5rem; /* Add some space between the image and the button */
+  
+  }
+  
+  .book-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Center content horizontally */
+    width: 100%;
+  
+  }
+  
+  /* Adjust max-width to be consistent */
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    margin: auto;
+    max-width: 1200px; /* Match the max-width with .book-list for consistency */
+  }
+  
+  /* Removed .item as it seems redundant */
+  
+  .book-title, .book-author {
+    color: #c15252; /* Reddish color for text */
+    font-size: 1em; /* Adjust size as needed */
+    font-weight: bold; /* Make the font bold */
+  }
+  
+  .more-info-link {
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 0.5rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Added box-shadow and transform transitions */
+    bottom: 0.5rem; /* Adjust as needed for the exact positioning */
+    width: calc(100% - 4rem); /* Subtract the total padding from the width */
+    padding: 0.3rem;
+    margin-top: 0.5rem; /
+  }
+  
+  .more-info-link:hover {
+    background-color: #0056b3;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .book-list, .container {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+  }
+  
+  .search-container {
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .search-bar {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    width: 50%; /* Adjust the width as needed */
+  }
+  
+  .search-button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .search-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive adjustment for smaller screens */
+  @media (max-width: 768px) {
+    .search-bar {
+      width: 70%; /* Larger width on smaller screens */
+    }
+  }
+  
+  /* Add this to your CSS for styling the header */
+  .header {
+    background-color: black;
+    padding: 1em 0;
+    display: flex;
+    align-items: center;
+    
+  }
+  
+  /* Style for the logo link */
+  .logo {
+    color: white; /* Set font color to white */
+    text-decoration: none; /* Remove underlines from links */
+    font-size: 1.5rem; /* Adjust the font size as needed */
+    margin-right: 4rem; /* Add margin to the right to create space between "WormyReads" and "Home" */
+    font-size: 2.6rem;
+    margin-left: 1rem;
+  }
+  
+  /* Style for the search bar */
+  .search-form {
+    display: flex; /* Make the form items flex */
+    align-items: center; /* Center items vertically */
+  }
+  
+  .search-bar {
+    padding: 0.5rem; /* Reduce the padding to make the search bar smaller */
+    margin-right: 1rem; /* Add margin to the right of the search bar to create space */
+    font-size: 1rem;
+    border: 1px solid white; /* Set the border color to white */
+    border-radius: 0.25rem;
+    width: 29rem; /* Adjust the width as needed to make it smaller */
+    background-color: rgb(246, 240, 240); /* Set the background color to black */
+    color: black; /* Set text color to white */
+  }
+  
+  .search-button {
+    padding: 0.5rem 1rem;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 0.3rem; /* Add margin to the left of the search button to create space */
+    margin-right: 14rem;
+  }
+  
+  .search-button:hover {
+    background-color: lightblue;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  
+  
+  .black-band {
+    background-color: black; /* Set the background color to black */
+    padding: 1rem 0; /* Add padding to create space at the top and bottom of the black band */
+    display: flex; /* Make the elements inside the black band flex containers */
+    justify-content: space-between; /* Space the elements evenly */
+    align-items: center; /* Center items vertically */
+  }
+  .navbar-link.home-link {
+    color: #FFA500; /* Change the color to orange (you can use any color you prefer) */
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  
+  /* Style for the Home button link */
+  .navbar-link.home-link {
+    color: white; /* Set the text color to white */
+    text-decoration: none;
+    font-size: 1rem;
+    margin-left: auto; /* Push the buttons to the right */
+    margin-right: 2rem; /* Add margin to the right to create space between "Home" and the search bar */
+    font-size: 1.5rem;
+  
+  }
+  
+  /* Style for the Login and Signup buttons links */
+  .navbar-link.login-link,
+  .navbar-link.signup-link {
+    color: white; /* Set the text color to white */
+    text-decoration: none;
+    font-size: 1rem;
+    margin-left: 2rem; /* Add space between the buttons */
+    font-size: 1.3rem;
+  
+  }
+  
+  
+  .header::after {
+    content: "";
+    display: block;
+    border: 2px solid black; /* Add a black border */
+    border-radius: 0px; /* Adjust the border-radius to round the corners */
+  }
+  
+  
+  .secondary-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .secondary-nav li {
+    margin: 0 15px;
+  }
+  .secondary-nav a {
+    text-decoration: none;
+    font-size: 20px;
+    color: black; /* Adjust the color as needed */
+    padding: 10px 0; /* Adjust padding as needed */
+    display: block;
+    transition: color 0.3s, background-color 0.3s; /* Smooth transition for color and background */
+  }
+  
+  .secondary-nav a:hover {
+    color: #007bff; /* Change text color on hover */
+    background-color: #f8f9fa; /* Add a subtle background color on hover */
+    text-decoration: underline;
+    text-shadow: black;
+  }
+  
+  .secondary-nav {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+  }
+
+
+
+/* Add hover effect to turn text blue */
+
+
+
+/* Add hover effect to turn text blue */
+
+
+/* Flex container for columns */
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 2rem;
+  margin-right: 12rem;
+}
+
+/* Individual column styles */
+.column {
+  flex: 0 0 30%;
+}
+
+.center {
+ 
+  text-align: center;
+}
+
+.flex{
+padding-top: 42px;
+  background-color: black;
+}
+/* ... rest of your CSS ... */
+body, p, div, span {
+  color: white !important;}

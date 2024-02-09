@@ -1,0 +1,319 @@
+/* css/styles2home.css */
+
+header {
+    color:white; /* Change to your desired text color */
+    text-align: center;
+    padding: 20px; /* Adjust padding as needed */
+    font-weight: bolder;
+    display: block;
+    font-size: 3.4rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: oblique;
+    text-decoration: underline;
+    box-shadow: inset;
+    background-color: black;
+
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+  }
+
+
+
+
+  .site-header {
+    text-align: center;
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+h1 {
+    font-size: 3rem; /* Adjust font size as needed */
+}
+
+.primary-nav,
+.secondary-nav {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.secondary-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.secondary-nav li {
+    margin: 0 15px;
+}
+.secondary-nav a {
+    text-decoration: none;
+    color: black; /* Adjust the color as needed */
+    padding: 10px 0; /* Adjust padding as needed */
+    display: block;
+    transition: color 0.3s, background-color 0.3s; /* Smooth transition for color and background */
+}
+
+.secondary-nav a:hover {
+    color: #007bff; /* Change text color on hover */
+    background-color: #f8f9fa; /* Add a subtle background color on hover */
+    text-decoration: underline;
+    text-shadow: black;
+}
+
+/* Ensure you also include styles for the rest of your header and primary-nav if it has not been styled yet */
+
+/* Add other styles as needed */
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: min-content;
+
+}
+
+/* Style for the image */
+.image-container img {
+    margin-top: 2rem;
+    width: 100%;
+    max-width: none /* Ensure the image doesn't exceed its container's width */
+
+}
+.image-overlay {
+    position: relative;
+    
+}
+
+/* Style for stretching the image horizontally */
+.stretch-horizontal {
+    width: 100%;
+    height: auto;
+    max-width: none;
+    max-height: none;
+}
+
+/* Style for the overlay text */
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    display: inline;
+    font-size: larger;
+    background-color: black;
+    right: 35%;
+    transform: translate(-50%, -50%);
+    color: white;
+    padding: 22px;
+    font-size: 74px;
+    font-weight: bold;
+    text-align: left;
+}
+
+
+.best-books {
+font-family: Georgia, 'Times New Roman', Times, serif
+};
+
+.login-signup-box {
+    position: absolute;
+    top: 20px; /* Adjust the top position as needed */
+    right: 20px; /* Adjust the right position as needed */
+    background-color: #fff; /* Background color for the box */
+    padding: 20px; /* Add padding as needed */
+    border-radius: 10px; /* Add rounded corners to the box */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+    z-index: 999; /* Ensure it's above the image */
+}
+
+.square-box {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    width: 200px; /* Set a fixed width for the square container */
+    height: 200px; /* Set a fixed height to make it square */
+    display: flex; /* Use flexbox to center the buttons */
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center horizontally */
+    size: 2rem;
+    background-color: black;
+    justify-content: space-around; /* Add space between buttons */
+}
+
+#login-button, #signup-button {
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button border */
+    padding: 10px 20px; /* Button padding */
+    font-size: 18px; /* Button font size */
+    cursor: pointer; /* Add pointer cursor on hover */
+}
+
+#login-button:hover, #signup-button:hover {
+    background-color: #0056b3; /* Button background color on hover */
+}
+
+
+/* Add this CSS to your existing styles2home.css file */
+
+.book-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping to the next line */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+    animation: slide 100s linear infinite; /* Adjust the duration (10s) as needed */
+    
+
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%); /* Adjust the percentage to control the speed of the slide */
+    }
+
+}
+.book {
+    flex: 0 0 auto; /* Ensure each book cover doesn't grow or shrink */
+    margin-right: 10px; /* Adjust the margin as needed for spacing between book covers */
+}
+
+
+.book {
+    flex: 0 0 auto; /* Ensure each book cover doesn't grow or shrink */
+    margin-right: 10px; /* Adjust the margin as needed for spacing between book covers */
+}
+
+.book:last-child {
+    margin-right: 0; /* Remove margin from the last book cover */
+}
+
+.book-cover {
+    max-width: 150px; /* Adjust the maximum width to your desired size */
+    height: auto;
+}
+.book:hover {
+    transform: scale(1.1); /* Scale the book cover by 5% on hover */
+}
+.image-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping to the next line */
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Adjust margin as needed */
+    padding: 20 20px; /* Adjust padding as needed */
+}
+
+.image-box {
+    margin: 5px; /* Adjust margin for spacing between images */
+    text-align: center;
+    flex: 0 0 calc(50% - 10px); /* Two images per row with margin in between */
+    max-width: calc(50% - 10px); /* Set maximum width for each image */
+    box-sizing: border-box; /* Include border in the width calculation */
+}
+
+.image-box img {
+    max-width: 75%;
+    height: auto;
+}
+.black-background {
+    background-color: black;
+    padding: 20px; /* Adjust padding as needed */
+}
+.white-background {
+    background-color: white
+}
+
+/* Add this CSS to your existing styles2home.css file */
+
+/* ... (your existing CSS) ./* Add this CSS to your existing styles2home.css file */
+
+/* ... (your existing CSS) ... */
+/* Add this CSS to your existing styles2home.css file */
+
+/* ... (your existing CSS) ... */
+
+/* Style for the quote overlay */
+.quote-image {
+    position: relative;
+}
+
+.quote-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 80%;
+}
+
+.quote-text {
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: bold;
+}
+
+.quote-author {
+    font-size: 16px;
+    line-height: 1.5;
+}/* Animation for the image boxes */
+.image-box {
+    transform: scale(0); /* Start with zero scale (small size) */
+    opacity: 0; /* Start with zero opacity (hidden) */
+    transition: transform 1s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.image-box.animate-fade-in {
+    transform: scale(1); /* Expand to original size */
+    opacity: 1; /* Show the image */
+}
+
+/* Add this CSS code to your styles2home.css fil/* ... your existing CSS ... */
+
+/* Set the color for all text to white */
+
+
+
+/* Add hover effect to turn text blue */
+
+/* Set the color for all text to white */
+body, p, div, span {
+    color: white !important;
+}
+
+
+/* Add hover effect to turn text blue */
+
+
+.white-thin-line {
+    border-top: 1px solid white;
+    margin: 20px 0;
+    width: 100%;
+}
+
+/* Flex container for columns */
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 2rem;
+}
+
+/* Individual column styles */
+.column {
+    flex: 0 0 30%;
+}
+
+.center {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+/* ... rest wcddscdsc your CSS ... */
